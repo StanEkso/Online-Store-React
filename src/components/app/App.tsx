@@ -1,7 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useDebouncedValue } from "../../hooks/useDebouncedValue";
-import { useFilters } from "../../hooks/useFilters";
-import useSorting from "../../hooks/useSortings";
+import { useMemo, useState } from "react";
+import { useDebouncedValue, useFilters, useSorting } from "../../hooks";
 import generateProducts from "../../utils/product-generator";
 import CardList from "../card/CardList";
 import Filters from "../filters/Filters";
@@ -21,12 +19,14 @@ function App() {
 
   const { filterFunction, filters, setFilters } = useFilters();
 
-  const filteredCards = useMemo(() => {
-    return cards
-      .filter(({ name }) => name.includes(filterDeferred))
-      .filter(filterFunction)
-      .sort(sortingFunction);
-  }, [filterDeferred, cards, sortingFunction, filterFunction]);
+  const filteredCards = useMemo(
+    () =>
+      cards
+        .filter(({ name }) => name.includes(filterDeferred))
+        .filter(filterFunction)
+        .sort(sortingFunction),
+    [filterDeferred, cards, sortingFunction, filterFunction]
+  );
 
   const colors = useMemo(
     () => Array.from(new Set(cards.map(({ color }) => color))),

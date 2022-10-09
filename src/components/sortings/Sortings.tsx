@@ -33,4 +33,4 @@ const Sortings: FC<Props> = ({ sorting, setSorting }) => {
     </div>
   );
 };
-export default Sortings;
+export default React.memo(Sortings);

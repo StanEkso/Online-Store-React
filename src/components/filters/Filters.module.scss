@@ -1,26 +1,84 @@
+@import "../common/containers";
+@import "../common/interactions";
+@import "../common/variables";
+
 .container {
+    @extend %base_container;
+    @include flex(column, 8px);
     top: 16px;
     position: sticky;
-    background: #f1f1f1;
-    border: 1px solid #e5e5e5;
-    display: flex;
-    flex-direction: column;
 
-    padding: 8px 16px;
+    &__title {
+        font-size: 1.2em;
 
+        &::after {
+            display: block;
+            content: "";
+            width: 100%;
+            border-top: 1px solid #cdcdcd;
+            margin-top: 2px;
+        }
+    }
 }
 
 .price {
-    display: flex;
+    @include flex(row, 1ch);
     align-items: center;
-    gap: 1ch;
 }
 
 .price__input {
-    border: none;
-    outline: none;
-    background: #e7e7e7;
-    padding: 12px 8px;
-    font-size: 1.1em;
+    @extend %base_input;
+    border-color: #00000025;
     max-width: 80px;
+}
+
+.color__selector {
+    @include flex(row, 8px);
+
+    font-size: 20px;
+
+    &_checkbox {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+
+        &:checked+label::before {
+            border-color: $highlight-color;
+            background-color: $highlight-color;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+        }
+
+        &+label {
+            display: inline-flex;
+            align-items: center;
+            user-select: none;
+
+            &::before {
+                content: '';
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                flex-shrink: 0;
+                flex-grow: 0;
+                border: 1px solid #adb5bd;
+                border-radius: 0.25em;
+                margin-right: 0.5em;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 75%;
+            }
+        }
+
+        &:not(:disabled)+label {
+            &:hover::before {
+                border-color: $highlight-color;
+            }
+
+            &:active::before {
+                border-color: $highlight-color;
+                background-color: fade-in($color: $highlight-color, $amount: 0.5)
+            }
+
+        }
+    }
 }

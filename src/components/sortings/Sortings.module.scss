@@ -1,14 +1,18 @@
+@import "../common/variables";
+@import "../common/containers";
+
 .selector {
     padding: 8px 12px;
-    width: 144px;
+    max-width: 200px;
     border: 1px solid black;
+    cursor: pointer;
+    border-radius: 2px;
 
     &_active {
-        border-color: blue;
+        border-color: $highlight-color;
     }
 }
 
 .container {
-    display: flex;
-    gap: 16px;
+    @include flex(row, 16px);
 }

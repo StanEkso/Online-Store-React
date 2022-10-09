@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ImageAssets from "../../assets";
+import ImageAssets from "../../assets/images";
 import { Product } from "../../types/product";
 import styles from "./Card.module.scss";
 

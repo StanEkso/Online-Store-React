@@ -1,0 +1,14 @@
+@import "variables";
+
+%base_input {
+    border: none;
+    outline: none;
+    background: #e7e7e7;
+    padding: 12px 8px;
+    font-size: 1.1em;
+    border: 1px solid transparent;
+
+    &:focus {
+        border-color: $highlight-color;
+    }
+}

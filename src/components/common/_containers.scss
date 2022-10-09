@@ -1,0 +1,19 @@
+@import "variables";
+
+%base_container {
+    padding: 8px 16px;
+    background: $container-bg-color;
+    border: 1px solid $border-color;
+}
+
+@mixin flex($direction: row, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    gap: $gap;
+}
+
+@mixin grid($columns: 1, $gap: 0) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}

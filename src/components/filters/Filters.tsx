@@ -43,8 +43,15 @@ const Filters: FC<Props> = ({ colors, filters, setFilters }) => {
     <div className={styles.container}>
       <h4 className={styles.container__title}>По цвету</h4>
       {colors.map((color, i) => (
-        <div className="" key={i}>
-          <input type="checkbox" name={color} id="" onChange={handleChecked} />
+        <div className={styles.color__selector} key={i}>
+          <input
+            type="checkbox"
+            name={color}
+            id={`color_${i}`}
+            onChange={handleChecked}
+            className={styles.color__selector_checkbox}
+          />
+          <label htmlFor={`color_${i}`}></label>
           {color}
         </div>
       ))}
@@ -57,8 +64,8 @@ const Filters: FC<Props> = ({ colors, filters, setFilters }) => {
           name="minimalPrice"
           onChange={handlePrice}
           placeholder="от"
-        />{" "}
-        -{" "}
+        />
+        -
         <input
           className={styles.price__input}
           max={MAXIMUM_PRICE}
