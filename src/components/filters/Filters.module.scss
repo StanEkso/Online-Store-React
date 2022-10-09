@@ -5,8 +5,7 @@
 .container {
     @extend %base_container;
     @include flex(column, 8px);
-    top: 16px;
-    position: sticky;
+
 
     &__title {
         font-size: 1.2em;
@@ -18,6 +17,11 @@
             border-top: 1px solid #cdcdcd;
             margin-top: 2px;
         }
+    }
+
+    @media (min-width: 768px) {
+        top: 16px;
+        position: sticky;
     }
 }
 

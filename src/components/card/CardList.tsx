@@ -9,12 +9,17 @@ type Props = {
 
 const CardList: FC<Props> = ({ cards }) => {
   return (
-    <div className={styles.list}>
-      {cards.map((card) => (
-        <Card key={card.id} {...card} />
-      ))}
+    <>
+      {Boolean(cards.length) && (
+        <div className={styles.list}>
+          {cards.map((card) => (
+            <Card key={card.id} {...card} />
+          ))}
+        </div>
+      )}
+
       {!cards.length && <CardNotFound />}
-    </div>
+    </>
   );
 };
 

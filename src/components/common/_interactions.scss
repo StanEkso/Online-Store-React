@@ -11,4 +11,8 @@
     &:focus {
         border-color: $highlight-color;
     }
+
+    &:invalid {
+        border-color: $invalid-color;
+    }
 }
