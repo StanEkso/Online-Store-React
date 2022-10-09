@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { MAXIMUM_PRICE } from "../../constants/product";
 import { ProductColor } from "../../types/color";
 import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";
@@ -51,6 +52,7 @@ const Filters: FC<Props> = ({ colors, filters, setFilters }) => {
       <div className={styles.price}>
         <input
           className={styles.price__input}
+          min={0}
           type="number"
           name="minimalPrice"
           onChange={handlePrice}
@@ -59,6 +61,7 @@ const Filters: FC<Props> = ({ colors, filters, setFilters }) => {
         -{" "}
         <input
           className={styles.price__input}
+          max={MAXIMUM_PRICE}
           type="number"
           name="maximumPrice"
           onChange={handlePrice}

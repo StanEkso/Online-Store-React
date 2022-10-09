@@ -8,8 +8,10 @@ import Filters from "../filters/Filters";
 import SearchBar from "../searchBar/SearchBar";
 import Sortings from "../sortings/Sortings";
 
+const PRODUCT_COUNT = 500;
+
 function App() {
-  const [cards] = useState(generateProducts(500));
+  const [cards] = useState(generateProducts(PRODUCT_COUNT));
 
   const [filterValue, setFilterValue] = useState("");
   const filterDeferred = useDebouncedValue(filterValue);

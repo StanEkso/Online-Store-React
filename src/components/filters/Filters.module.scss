@@ -1,4 +1,6 @@
 .container {
+    top: 16px;
+    position: sticky;
     background: #f1f1f1;
     border: 1px solid #e5e5e5;
     display: flex;
@@ -20,5 +22,5 @@
     background: #e7e7e7;
     padding: 12px 8px;
     font-size: 1.1em;
-    max-width: 72px;
+    max-width: 80px;
 }

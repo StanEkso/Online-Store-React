@@ -10,9 +10,6 @@ export function useFilters() {
   const filtersDebounced = useDebouncedValue(filters);
   const filterFunction = useCallback(
     (A: Product) => {
-      const max = filtersDebounced?.maximumPrice || 1000000;
-      console.log(max);
-      console.log(A.price > max);
       if (
         !filtersDebounced.selectedColors.includes(A.color) &&
         filtersDebounced.selectedColors.length

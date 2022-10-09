@@ -1,3 +1,12 @@
+import { COLOR_ARRAY } from "../../constants/colors";
+import { PRODUCT_NAMES_TEMPLATES } from "../../constants/names";
+import {
+  MAXIMUM_PRICE,
+  MAXIMUM_PRODUCT_RATING,
+  MINIMAL_PRICE,
+  MINIMAL_PRODUCT_RATING,
+} from "../../constants/product";
+import { RANDOM_WORDS_LIST } from "../../constants/words";
 import { ProductColor } from "../../types/color";
 import { Product } from "../../types/product";
 import numberFromInterval from "../numberFromInterval";
@@ -21,69 +30,33 @@ const generateProduct = (): Product => {
 
 const generateId = (): string => Date.now() + getRandomString();
 
-const names: string[] = [
-  "Кроссовки",
-  "Майка",
-  "Свитшот",
-  "Толстовка",
-  "Ботинки",
-  "Лоферы",
-  "Кеды",
-  "Туфли",
-  "Полусапоги",
-];
-
 const generateName = (): string => {
-  return names[numberFromInterval(0, names.length - 1)] + " " + getRandomString();
+  return (
+    PRODUCT_NAMES_TEMPLATES[
+      numberFromInterval(0, PRODUCT_NAMES_TEMPLATES.length - 1)
+    ] +
+    " " +
+    getRandomString()
+  );
 };
 
-const randomWords = [
-  "Lorem",
-  "ipsum",
-  "dolor",
-  "sit",
-  "amet,",
-  "consectetur",
-  "adipiscing",
-  "elit,",
-  "sed",
-  "do",
-  "eiusmod",
-  "tempor",
-  "incididunt",
-  "ut",
-  "labore",
-  "et",
-  "dolore",
-  "magna",
-  "aliqua",
-  "Ut",
-];
 const generateDescription = (length = 10): string => {
-  return [...new Array(length > 0 ? length : 0)].map(
-    () => randomWords[numberFromInterval(0, randomWords.length - 1)]
-  ).join(" ");
+  return [...new Array(length > 0 ? length : 0)]
+    .map(
+      () =>
+        RANDOM_WORDS_LIST[numberFromInterval(0, RANDOM_WORDS_LIST.length - 1)]
+    )
+    .join(" ");
 };
-const colorArray = [
-    ProductColor.BLUE,
-    ProductColor.RED,
-    ProductColor.GREEN,
-    ProductColor.LIGHTBLUE,
-    ProductColor.PURPLE,
-    ProductColor.YELLOW,
-    ProductColor.BLACK,
-    ProductColor.WHITE,
-    ProductColor.PINK,
-    ProductColor.GRAY,
-  ];
+
 const generateColor = (): ProductColor => {
-    return colorArray[numberFromInterval(0, colorArray.length - 1)]
-}
+  return COLOR_ARRAY[numberFromInterval(0, COLOR_ARRAY.length - 1)];
+};
 
 const generatePrice = () => {
-    return numberFromInterval(10, 9999);
-}
+  return numberFromInterval(MINIMAL_PRICE, MAXIMUM_PRICE);
+};
 
 const generateRating = () => {
-    return numberFromInterval(1, 100)
-}
+  return numberFromInterval(MINIMAL_PRODUCT_RATING, MAXIMUM_PRODUCT_RATING);
+};
