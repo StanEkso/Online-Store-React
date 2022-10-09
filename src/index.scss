@@ -20,4 +20,17 @@
     @media (max-width: 767px) {
         margin: 10px;
     }
+
+    &__grid {
+        display: grid;
+        gap: 16px;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 2fr;
+        }
+
+        @media (min-width: 1279px) {
+            grid-template-columns: 1fr 3fr;
+        }
+    }
 }
