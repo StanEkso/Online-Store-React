@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from "react";
-
+import styles from "./SearchBar.module.scss";
 type Props = {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -8,9 +8,18 @@ type Props = {
 const SearchBar: FC<Props> = ({ value, setValue }) => {
   const changeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
-    []
+    [setValue]
   );
-  return <input placeholder="Поиск" value={value} onChange={changeHandler} />;
+  return (
+    <div className={styles.container}>
+      <input
+        placeholder="Поиск"
+        value={value}
+        onChange={changeHandler}
+        className={styles.field}
+      />
+    </div>
+  );
 };
 
-export default SearchBar;
+export default React.memo(SearchBar);

@@ -1,0 +1,14 @@
+.selector {
+    padding: 8px 12px;
+    width: 144px;
+    border: 1px solid black;
+
+    &_active {
+        border-color: blue;
+    }
+}
+
+.container {
+    display: flex;
+    gap: 16px;
+}

@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter;
+}
+
+.app__wrapper {
+    margin: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (max-width: 1279px) {
+        margin: 20px 30px;
+    }
+
+    @media (max-width: 767px) {
+        margin: 10px;
+    }
+}
