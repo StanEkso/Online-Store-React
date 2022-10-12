@@ -1,8 +1,9 @@
-import PlaceHolderImage from "./placeholder.jpg"
-
+import PlaceHolderImage from "./placeholder.jpg";
+import SneakersImage from "./sneakers.jpg";
 
 const ImageAssets = {
-    placeholder: PlaceHolderImage
-}
+  placeholder: PlaceHolderImage,
+  sneakers: SneakersImage,
+};
 
-export default ImageAssets
+export default ImageAssets;

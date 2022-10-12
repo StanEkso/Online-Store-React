@@ -1,7 +1,29 @@
 import { useCallback, useState } from "react";
-import { FiltersOptions } from "../types/filters";
+import { ProductColor } from "../types/color";
+import { FilterFunction, FiltersOptions } from "../types/filters";
 import { Product } from "../types/product";
 import { useDebouncedValue } from "./useDebouncedValue";
+
+const filterByColors = (
+  activeColors: ProductColor[]
+): FilterFunction<Product> => {
+  if (!activeColors.length) return () => true;
+  return (A: Product) => activeColors.includes(A.color);
+};
+
+const filterByMinimalPrice = (
+  minimalPrice: number | undefined
+): FilterFunction<Product> => {
+  if (!minimalPrice) return () => true;
+  return (A: Product) => A.price >= minimalPrice;
+};
+
+const filterByMaximumPrice = (
+  maximumPrice: number | undefined
+): FilterFunction<Product> => {
+  if (!maximumPrice) return () => true;
+  return (A: Product) => A.price <= maximumPrice;
+};
 
 export function useFilters() {
   const [filters, setFilters] = useState<FiltersOptions>({
@@ -10,22 +32,13 @@ export function useFilters() {
   const filtersDebounced = useDebouncedValue(filters);
   const filterFunction = useCallback(
     (A: Product) => {
-      if (
-        !filtersDebounced.selectedColors.includes(A.color) &&
-        filtersDebounced.selectedColors.length
-      )
-        return false;
-      if (
-        filtersDebounced.minimalPrice &&
-        A.price < filtersDebounced.minimalPrice
-      )
-        return false;
-      if (
-        filtersDebounced.maximumPrice &&
-        A.price > filtersDebounced.maximumPrice
-      )
-        return false;
-      return true;
+      const { selectedColors, minimalPrice, maximumPrice } = filtersDebounced;
+      const currentFilters = [
+        filterByColors(selectedColors),
+        filterByMinimalPrice(minimalPrice),
+        filterByMaximumPrice(maximumPrice),
+      ];
+      return currentFilters.every((filter) => filter(A));
     },
     [filtersDebounced]
   );

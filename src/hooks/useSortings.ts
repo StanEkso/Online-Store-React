@@ -21,7 +21,7 @@ export const sortingTypes: SortingType[] = [
 ];
 
 const useSorting = (key: string) => {
-  const fn = useCallback(
+  return useCallback(
     (...args: [Product, Product]) => {
       const sortingType = sortingTypes.find(({ type }) => type === key);
       if (sortingType) {
@@ -31,7 +31,6 @@ const useSorting = (key: string) => {
     },
     [key]
   );
-  return fn;
 };
 
 export default useSorting;

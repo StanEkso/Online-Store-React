@@ -1,3 +1,4 @@
+import ImageAssets from "../../assets/images";
 import { COLOR_ARRAY } from "../../constants/colors";
 import { PRODUCT_NAMES_TEMPLATES } from "../../constants/names";
 import {
@@ -24,7 +25,7 @@ const generateProduct = (): Product => {
     color: generateColor(),
     price: generatePrice(),
     rating: generateRating(),
-    imageUrl: "",
+    imageUrl: generateImage("1"),
   };
 };
 
@@ -59,4 +60,8 @@ const generatePrice = () => {
 
 const generateRating = () => {
   return numberFromInterval(MINIMAL_PRODUCT_RATING, MAXIMUM_PRODUCT_RATING);
+};
+
+const generateImage = (name: string) => {
+  return ImageAssets.sneakers;
 };
