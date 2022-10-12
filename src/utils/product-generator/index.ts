@@ -1,6 +1,5 @@
-import ImageAssets from "../../assets/images";
 import { COLOR_ARRAY } from "../../constants/colors";
-import { PRODUCT_NAMES_TEMPLATES } from "../../constants/names";
+import { PRODUCTS_TEMPLATES } from "../../constants/names";
 import {
   MAXIMUM_PRICE,
   MAXIMUM_PRODUCT_RATING,
@@ -9,7 +8,7 @@ import {
 } from "../../constants/product";
 import { RANDOM_WORDS_LIST } from "../../constants/words";
 import { ProductColor } from "../../types/color";
-import { Product } from "../../types/product";
+import { Product, ProductMetadata } from "../../types/product";
 import numberFromInterval from "../numberFromInterval";
 import getRandomString from "../randomString";
 
@@ -18,28 +17,19 @@ export default function generateProducts(count: number): Product[] {
 }
 
 const generateProduct = (): Product => {
+  const { name, imageUrl } = generateMetadata();
   return {
     id: generateId(),
-    name: generateName(),
+    name,
     description: generateDescription(),
     color: generateColor(),
     price: generatePrice(),
     rating: generateRating(),
-    imageUrl: generateImage("1"),
+    imageUrl,
   };
 };
 
 const generateId = (): string => Date.now() + getRandomString();
-
-const generateName = (): string => {
-  return (
-    PRODUCT_NAMES_TEMPLATES[
-      numberFromInterval(0, PRODUCT_NAMES_TEMPLATES.length - 1)
-    ] +
-    " " +
-    getRandomString()
-  );
-};
 
 const generateDescription = (length = 10): string => {
   return [...new Array(length > 0 ? length : 0)]
@@ -62,6 +52,11 @@ const generateRating = () => {
   return numberFromInterval(MINIMAL_PRODUCT_RATING, MAXIMUM_PRODUCT_RATING);
 };
 
-const generateImage = (name: string) => {
-  return ImageAssets.sneakers;
+const generateMetadata = (): ProductMetadata => {
+  const { name, imageUrl } =
+    PRODUCTS_TEMPLATES[numberFromInterval(0, PRODUCTS_TEMPLATES.length - 1)];
+  return {
+    name: name + " " + getRandomString(),
+    imageUrl,
+  };
 };

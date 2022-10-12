@@ -9,3 +9,8 @@ export interface Product {
   rating: number;
   imageUrl: string;
 }
+
+export interface ProductMetadata {
+  name: string;
+  imageUrl: string;
+}
