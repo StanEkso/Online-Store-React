@@ -1,23 +1,6 @@
 import ImageAssets from "../../assets/images";
 import { ProductMetadata } from "../../types/product";
 
-export const PRODUCT_NAMES_TEMPLATES: string[] = [
-  "Кроссовки",
-  "Майка",
-  "Свитшот",
-  "Толстовка",
-  "Ботинки",
-  "Лоферы",
-  "Кеды",
-  "Туфли",
-  "Полусапоги",
-];
-
-export const PRODUCT_NAMES_IMAGES: string[] = [
-  ImageAssets.sneakers,
-  ImageAssets.shirt,
-];
-
 export const PRODUCTS_TEMPLATES: ProductMetadata[] = [
   {
     name: "Кроссовки",
@@ -26,6 +9,10 @@ export const PRODUCTS_TEMPLATES: ProductMetadata[] = [
   {
     name: "Майка",
     imageUrl: ImageAssets.shirt,
+  },
+  {
+    name: "Кеды",
+    imageUrl: ImageAssets.gumshoes_2,
   },
   {
     name: "Свитшот",
@@ -38,5 +25,25 @@ export const PRODUCTS_TEMPLATES: ProductMetadata[] = [
   {
     name: "Ботинки",
     imageUrl: ImageAssets.boots,
+  },
+  {
+    name: "Лоферы",
+    imageUrl: ImageAssets.loafers,
+  },
+  {
+    name: "Кеды",
+    imageUrl: ImageAssets.gumshoes,
+  },
+  {
+    name: "Туфли",
+    imageUrl: ImageAssets.shoes,
+  },
+  {
+    name: "Полусапоги",
+    imageUrl: ImageAssets.semishoes,
+  },
+  {
+    name: "Майка",
+    imageUrl: ImageAssets.shirt_alt,
   },
 ];
