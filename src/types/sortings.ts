@@ -1,9 +1,7 @@
-import { Product } from "./product";
+export type SortingFunction<Type = number> = (A: Type, B: Type) => number;
 
-export type SortingFunction<T = number> = (A: T, B: T) => number;
-
-export interface SortingType<T = Product> {
+export interface SortingType<Type = number> {
   type: string;
-  fn: SortingFunction<T>;
+  fn: SortingFunction<Type>;
   name: string;
 }

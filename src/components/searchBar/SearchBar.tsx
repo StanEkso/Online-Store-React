@@ -1,4 +1,5 @@
 import React, { FC, useCallback } from "react";
+import ImageAssets from "../../assets/images";
 import styles from "./SearchBar.module.scss";
 type Props = {
   value: string;
@@ -12,6 +13,11 @@ const SearchBar: FC<Props> = ({ value, setValue }) => {
   );
   return (
     <div className={styles.container}>
+      <img
+        src={ImageAssets.searchIcon}
+        alt="Иконка поиска"
+        className={styles.icon}
+      />
       <input
         placeholder="Поиск"
         value={value}

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Product } from "../types/product";
 import { SortingType } from "../types/sortings";
 
-export const sortingTypes: SortingType[] = [
+export const sortingTypes: SortingType<Product>[] = [
   {
     type: "price/asc",
     fn: (A, B) => A.price - B.price,

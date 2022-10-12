@@ -6,6 +6,14 @@ type Props = {
   setSorting: React.Dispatch<React.SetStateAction<string>>;
 };
 
+const getClassesForSelector = (isActive = false) => {
+  const classes = [styles.selector];
+  if (isActive) {
+    classes.push(styles.selector_active);
+  }
+  return classes.join(" ");
+};
+
 const Sortings: FC<Props> = ({ sorting, setSorting }) => {
   const handleSortingClick = (type: string) => {
     if (sorting === type) {
@@ -16,14 +24,10 @@ const Sortings: FC<Props> = ({ sorting, setSorting }) => {
   return (
     <div className={styles.container}>
       {sortingTypes.map((el) => {
-        const classes = [styles.selector];
-        if (el.type === sorting) {
-          classes.push(styles.selector_active);
-        }
         return (
           <div
             key={el.type}
-            className={classes.join(" ")}
+            className={getClassesForSelector(el.type === sorting)}
             onClick={() => handleSortingClick(el.type)}
           >
             {el.name}

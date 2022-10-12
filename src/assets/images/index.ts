@@ -10,6 +10,7 @@ import GumshoesImage from "./gumshoes.jpg";
 import GumshoesImage_alt from "./gumshoes_2.jpg";
 import ShoesImage from "./shoes.jpg";
 import SemiShoesImage from "./semi_shoes.jpeg";
+import SearchIcon from "./search.svg";
 
 const ImageAssets: Record<string, string> = {
   placeholder: PlaceHolderImage,
@@ -24,6 +25,7 @@ const ImageAssets: Record<string, string> = {
   shoes: ShoesImage,
   semishoes: SemiShoesImage,
   shirt_alt: ShirtAltImage,
+  searchIcon: SearchIcon,
 };
 
 export default ImageAssets;

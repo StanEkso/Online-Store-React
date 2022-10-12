@@ -38,7 +38,7 @@ function App() {
       <Sortings sorting={sortingValue} setSorting={setSortingValue} />
 
       <div className="app__wrapper__grid">
-        <div>
+        <div className="app__wrapper-column">
           <Filters colors={colors} filters={filters} setFilters={setFilters} />
           <h2>Всего товаров: {filteredCards.length}</h2>
         </div>

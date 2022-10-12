@@ -6,4 +6,4 @@ export interface FiltersOptions {
   maximumPrice?: number;
 }
 
-export type FilterFunction<T> = (A: T) => boolean;
+export type FilterFunction<Type = number> = (A: Type) => boolean;
