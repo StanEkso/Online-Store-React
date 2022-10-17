@@ -1,5 +1,5 @@
-import ImageAssets from "../../assets/images";
-import { ProductMetadata } from "../../types/product";
+import ImageAssets from "../assets/images";
+import { ProductMetadata } from "../types/product";
 
 export const PRODUCTS_TEMPLATES: ProductMetadata[] = [
   {

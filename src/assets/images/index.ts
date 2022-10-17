@@ -12,7 +12,7 @@ import ShoesImage from "./shoes.jpg";
 import SemiShoesImage from "./semi_shoes.jpeg";
 import SearchIcon from "./search.svg";
 
-const ImageAssets: Record<string, string> = {
+const ImageAssets = {
   placeholder: PlaceHolderImage,
   sneakers: SneakersImage,
   shirt: ShirtImage,

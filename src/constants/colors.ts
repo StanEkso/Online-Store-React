@@ -1,4 +1,4 @@
-import { ProductColor } from "../../types/color";
+import { ProductColor } from "../types/color";
 
 export const COLOR_ARRAY = [
   ProductColor.BLUE,

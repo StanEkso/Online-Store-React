@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { MAXIMUM_PRICE } from "../../constants/product";
+import { MAXIMUM_PRICE } from "../../constants";
 import { ProductColor } from "../../types/color";
 import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";

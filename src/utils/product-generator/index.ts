@@ -1,12 +1,12 @@
-import { COLOR_ARRAY } from "../../constants/colors";
-import { PRODUCTS_TEMPLATES } from "../../constants/names";
 import {
+  COLOR_ARRAY,
   MAXIMUM_PRICE,
   MAXIMUM_PRODUCT_RATING,
   MINIMAL_PRICE,
   MINIMAL_PRODUCT_RATING,
-} from "../../constants/product";
-import { RANDOM_WORDS_LIST } from "../../constants/words";
+  PRODUCTS_TEMPLATES,
+  RANDOM_WORDS_LIST,
+} from "../../constants";
 import { ProductColor } from "../../types/color";
 import { Product, ProductMetadata } from "../../types/product";
 import numberFromInterval from "../numberFromInterval";
