@@ -5,3 +5,7 @@ export interface SortingType<Type = number> {
   fn: SortingFunction<Type>;
   name: string;
 }
+export interface Sorting<Type = number> {
+  fn: SortingFunction<Type>;
+  name: string;
+}

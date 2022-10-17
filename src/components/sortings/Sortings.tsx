@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { sortingTypes } from "../../hooks/useSortings";
 import styles from "./Sortings.module.scss";
-type Props = {
+interface Props {
   sorting: string;
   setSorting: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
 const getClassesForSelector = (isActive = false) => {
   const classes = [styles.selector];
@@ -15,22 +15,18 @@ const getClassesForSelector = (isActive = false) => {
 };
 
 const Sortings: FC<Props> = ({ sorting, setSorting }) => {
-  const handleSortingClick = (type: string) => {
-    if (sorting === type) {
-      return setSorting("default");
-    }
-    setSorting(type);
-  };
+  const handleSortingClick = (type: string) =>
+    setSorting(sorting !== type ? type : "default");
   return (
     <div className={styles.container}>
-      {sortingTypes.map((el) => {
+      {Object.entries(sortingTypes).map(([key, value]) => {
         return (
           <div
-            key={el.type}
-            className={getClassesForSelector(el.type === sorting)}
-            onClick={() => handleSortingClick(el.type)}
+            key={key}
+            className={getClassesForSelector(key === sorting)}
+            onClick={() => handleSortingClick(key)}
           >
-            {el.name}
+            {value.name}
           </div>
         );
       })}
