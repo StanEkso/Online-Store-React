@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { Product } from "../types/product";
-import { Sorting } from "../types/sortings";
+import { SortingType } from "../types/sortings";
 
-export const sortingTypes: Record<string, Sorting<Product>> = {
+export const sortingTypes: Record<string, SortingType<Product>> = {
   "price/asc": {
     fn: (A, B) => A.price - B.price,
     name: "Сначала дешевые",

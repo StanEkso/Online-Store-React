@@ -1,0 +1,6 @@
+@import "../common/containers";
+
+.container {
+    @extend %base_container;
+    @include flex(column, 8px);
+}

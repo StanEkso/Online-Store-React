@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import { ProductColor } from "../../types/color";
 import { FiltersOptions } from "../../types/filters";
 import FilterByColor from "./FilterByColor";
+import FilterByName from "./FilterByName";
 import FilterByPrice from "./FilterByPrice";
-import styles from "./Filters.module.scss";
 type Props = {
   colors: ProductColor[];
   filters: FiltersOptions;
@@ -11,19 +11,22 @@ type Props = {
 };
 
 const Filters: FC<Props> = ({ colors, filters, setFilters }) => {
+  const setSearchValue = (searchValue: string) => {
+    setFilters((filters) => ({
+      ...filters,
+      searchValue,
+    }));
+  };
   return (
-    <div className={styles.container}>
+    <>
+      <FilterByName value={filters.searchValue} setValue={setSearchValue} />
       <FilterByColor
         colors={colors}
         filters={filters}
         setFilters={setFilters}
       />
-      <FilterByPrice
-        colors={colors}
-        filters={filters}
-        setFilters={setFilters}
-      />
-    </div>
+      <FilterByPrice filters={filters} setFilters={setFilters} />
+    </>
   );
 };
 

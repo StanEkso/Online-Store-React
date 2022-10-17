@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
-import { useDebouncedValue, useFilters, useSorting } from "../../hooks";
+import { useFilters, useSorting } from "../../hooks";
 import generateProducts from "../../utils/product-generator";
 import CardList from "../card/CardList";
-import Filters from "../filters/Filters";
-import SearchBar from "../searchBar/SearchBar";
+import Container from "../container/Container";
+import FilterByColor from "../filters/FilterByColor";
+import FilterByName from "../filters/FilterByName";
+import FilterByPrice from "../filters/FilterByPrice";
 import Sortings from "../sortings/Sortings";
 
 const PRODUCT_COUNT = 500;
@@ -11,35 +13,41 @@ const PRODUCT_COUNT = 500;
 function App() {
   const [cards] = useState(generateProducts(PRODUCT_COUNT));
 
-  const [filterValue, setFilterValue] = useState("");
-  const filterDeferred = useDebouncedValue(filterValue);
-
   const [sortingValue, setSortingValue] = useState("default");
   const sortingFunction = useSorting(sortingValue);
 
   const { filterFunction, filters, setFilters } = useFilters();
 
   const filteredCards = useMemo(
-    () =>
-      cards
-        .filter(({ name }) => name.includes(filterDeferred))
-        .filter(filterFunction)
-        .sort(sortingFunction),
-    [filterDeferred, cards, sortingFunction, filterFunction]
+    () => cards.filter(filterFunction).sort(sortingFunction),
+    [cards, sortingFunction, filterFunction]
   );
 
   const colors = useMemo(
     () => Array.from(new Set(cards.map(({ color }) => color))),
     [cards]
   );
+  const setSearchValue = (searchValue: string) => {
+    setFilters((filters) => ({
+      ...filters,
+      searchValue,
+    }));
+  };
   return (
     <div className="app__wrapper">
-      <SearchBar value={filterValue} setValue={setFilterValue} />
+      <FilterByName value={filters.searchValue} setValue={setSearchValue} />
       <Sortings sorting={sortingValue} setSorting={setSortingValue} />
 
       <div className="app__wrapper__grid">
         <div className="app__wrapper-column">
-          <Filters colors={colors} filters={filters} setFilters={setFilters} />
+          <Container>
+            <FilterByColor
+              colors={colors}
+              filters={filters}
+              setFilters={setFilters}
+            />
+            <FilterByPrice filters={filters} setFilters={setFilters} />
+          </Container>
           <h2>Всего товаров: {filteredCards.length}</h2>
         </div>
         <CardList cards={filteredCards} />

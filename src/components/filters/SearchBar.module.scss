@@ -1,0 +1,21 @@
+@import "../common/interactions";
+
+.container {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.field {
+    @extend %base_input;
+    width: 100%;
+    padding-left: 40px;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 8px;
+    max-width: 24px;
+}

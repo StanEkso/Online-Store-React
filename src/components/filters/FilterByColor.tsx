@@ -11,19 +11,19 @@ type Props = {
 
 const FilterByColor: FC<Props> = ({ colors, filters, setFilters }) => {
   const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedColors = filters.selectedColors.filter(
-      (el) => el !== e.target.name
-    );
-    if (e.target.checked) selectedColors.push(e.target.name as ProductColor);
-    setFilters((state) => ({
-      ...state,
-      selectedColors,
-    }));
+    const currentColors = new Set(filters.selectedColors);
+    currentColors.has(e.target.name as ProductColor)
+      ? currentColors.delete(e.target.name as ProductColor)
+      : currentColors.add(e.target.name as ProductColor);
+    setFilters({
+      ...filters,
+      selectedColors: currentColors,
+    });
   };
   return (
     <>
       <h4 className={styles.container__title}>По цвету</h4>
-      {colors.map((color, i) => (
+      {Array.from(colors).map((color, i) => (
         <div className={styles.color__selector} key={i}>
           <input
             type="checkbox"
