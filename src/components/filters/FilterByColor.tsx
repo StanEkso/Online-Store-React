@@ -1,24 +1,27 @@
 import React, { FC, useCallback } from "react";
 import { ProductColor } from "../../types/color";
-import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";
 
-type Props = {
+interface FilterColorProps {
   colors: ProductColor[];
-  filters: FiltersOptions;
+  activeColors: Set<ProductColor>;
   setColors: (colors: Set<ProductColor>) => void;
-};
+}
 
-const FilterByColor: FC<Props> = ({ colors, filters, setColors }) => {
+const FilterByColor: FC<FilterColorProps> = ({
+  colors,
+  activeColors,
+  setColors,
+}) => {
   const handleChecked = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const currentColors = new Set(filters.selectedColors);
+      const currentColors = new Set(activeColors);
       currentColors.has(e.target.name as ProductColor)
         ? currentColors.delete(e.target.name as ProductColor)
         : currentColors.add(e.target.name as ProductColor);
       setColors(currentColors);
     },
-    [filters, setColors]
+    [activeColors, setColors]
   );
   return (
     <>
@@ -31,6 +34,7 @@ const FilterByColor: FC<Props> = ({ colors, filters, setColors }) => {
             id={`color_${i}`}
             onChange={handleChecked}
             className={styles.color__selector_checkbox}
+            checked={activeColors.has(color)}
           />
           <label htmlFor={`color_${i}`}></label>
           {color}

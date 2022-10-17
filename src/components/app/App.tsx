@@ -25,7 +25,7 @@ function App() {
   );
 
   const colors = useMemo(
-    () => Array.from(new Set(cards.map(({ color }) => color))),
+    () => Array.from(new Set(cards.map(({ color }) => color))).sort(),
     [cards]
   );
   const setSearchValue = useCallback((searchValue: string) => {
@@ -34,24 +34,47 @@ function App() {
       searchValue,
     }));
   }, []);
-  const setSelectedColors = (selectedColors: Set<ProductColor>) =>
-    setFilters((filters) => ({ ...filters, selectedColors }));
+  const setSelectedColors = useCallback(
+    (selectedColors: Set<ProductColor>) =>
+      setFilters((filters) => ({ ...filters, selectedColors })),
+    []
+  );
+  const setMinMaxPrice = useCallback(
+    (object: { minimalPrice?: number; maximumPrice?: number }) => {
+      setFilters((filters) => ({
+        ...filters,
+        ...object,
+      }));
+    },
+    []
+  );
   return (
     <div className="app__wrapper">
-      <FilterByName value={filters.searchValue} setValue={setSearchValue} />
-      <Sortings sorting={sortingValue} setSorting={setSortingValue} />
+      <header className="app__wrapper-logotype">
+        <h1>React-Shop</h1>
+      </header>
+      <div className="app__wrapper-header app__wrapper-header-sticky">
+        <FilterByName value={filters.searchValue} setValue={setSearchValue} />
+        <Sortings sorting={sortingValue} setSorting={setSortingValue} />
+      </div>
 
       <div className="app__wrapper__grid">
         <div className="app__wrapper-column">
-          <Container>
-            <FilterByColor
-              colors={colors}
-              filters={filters}
-              setColors={setSelectedColors}
-            />
-            <FilterByPrice filters={filters} setFilters={setFilters} />
-          </Container>
-          <h2>Всего товаров: {filteredCards.length}</h2>
+          <div className="app__wrapper-column-sticky">
+            <Container>
+              <FilterByColor
+                colors={colors}
+                activeColors={filters.selectedColors}
+                setColors={setSelectedColors}
+              />
+              <FilterByPrice
+                maximumPrice={filters.maximumPrice}
+                minimalPrice={filters.minimalPrice}
+                setMinMaxPrice={setMinMaxPrice}
+              />
+            </Container>
+            <h2>Всего товаров: {filteredCards.length}</h2>
+          </div>
         </div>
         <CardList cards={filteredCards} />
       </div>

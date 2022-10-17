@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import "./components/common/variables";
 
 * {
     margin: 0;
@@ -8,20 +9,22 @@
 }
 
 .app__wrapper {
-    margin: 20px 60px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 
-    @media (max-width: 1279px) {
-        margin: 20px 30px;
-    }
-
-    @media (max-width: 767px) {
-        margin: 10px;
-    }
 
     &__grid {
+        margin: 20px 60px;
+
+        @media (max-width: 1279px) {
+            margin: 20px 30px;
+        }
+
+        @media (max-width: 767px) {
+            margin: 10px;
+        }
+
         display: grid;
         gap: 16px;
 
@@ -31,6 +34,59 @@
 
         @media (min-width: 1279px) {
             grid-template-columns: 1fr 3fr;
+        }
+    }
+
+    &-logotype {
+        padding: 0 60px;
+
+        @media (max-width: 1279px) {
+            padding: 0 30px;
+        }
+
+        @media (max-width: 767px) {
+            padding: 0 10px;
+        }
+
+        padding-top: 16px !important;
+    }
+
+    &-header {
+        padding: 16px 60px;
+
+        @media (max-width: 1279px) {
+            padding: 16px 30px;
+        }
+
+        @media (max-width: 767px) {
+            padding: 16px 10px;
+        }
+
+        &-sticky {
+            border-bottom: 1px solid $border-color;
+
+            @media (min-width: 768px) {
+                position: sticky;
+                top: 0;
+            }
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        background: #fff;
+    }
+
+    &-column {
+        position: relative;
+
+        &-sticky {
+            gap: 16px;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 144px;
         }
     }
 }

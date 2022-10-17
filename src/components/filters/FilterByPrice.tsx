@@ -1,20 +1,27 @@
 import React, { FC } from "react";
 import { MAXIMUM_PRICE } from "../../constants";
-import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";
 
 interface FilterPriceProps {
-  filters: FiltersOptions;
-  setFilters: React.Dispatch<React.SetStateAction<FiltersOptions>>;
+  minimalPrice: number | undefined;
+  maximumPrice: number | undefined;
+  setMinMaxPrice: (object: {
+    minimalPrice?: number;
+    maximumPrice?: number;
+  }) => void;
 }
 
 const includeProperty = <T,>(prop: T, inc: boolean): T | undefined =>
   inc ? prop : undefined;
-
-const FilterByPrice: FC<FilterPriceProps> = ({ filters, setFilters }) => {
+const FilterByPrice: FC<FilterPriceProps> = ({
+  minimalPrice,
+  maximumPrice,
+  setMinMaxPrice,
+}) => {
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters({
-      ...filters,
+    setMinMaxPrice({
+      minimalPrice,
+      maximumPrice,
       [e.target.name]: includeProperty(e.target.value, !!e.target.value),
     });
   };
@@ -25,7 +32,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({ filters, setFilters }) => {
         <input
           className={styles.price__input}
           min={0}
-          max={filters.maximumPrice || MAXIMUM_PRICE}
+          max={maximumPrice || MAXIMUM_PRICE}
           type="number"
           name="minimalPrice"
           onChange={handlePrice}
@@ -34,7 +41,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({ filters, setFilters }) => {
         -
         <input
           className={styles.price__input}
-          min={filters.minimalPrice || 0}
+          min={minimalPrice || 0}
           max={MAXIMUM_PRICE}
           type="number"
           name="maximumPrice"

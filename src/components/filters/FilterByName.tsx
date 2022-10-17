@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import ImageAssets from "../../assets/images";
-import styles from "./SearchBar.module.scss";
+import styles from "./Filters.module.scss";
 interface FilterNameProps {
   value: string;
   setValue: (value: string) => void;
@@ -12,7 +12,7 @@ const FilterByName: FC<FilterNameProps> = ({ value, setValue }) => {
     [setValue]
   );
   return (
-    <div className={styles.container}>
+    <div className={styles.search__bar}>
       <img
         src={ImageAssets.searchIcon}
         alt="Иконка поиска"
