@@ -11,8 +11,6 @@ interface FilterPriceProps {
   }) => void;
 }
 
-const includeProperty = <T,>(prop: T, inc: boolean): T | undefined =>
-  inc ? prop : undefined;
 const FilterByPrice: FC<FilterPriceProps> = ({
   minimalPrice,
   maximumPrice,
@@ -22,7 +20,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({
     setMinMaxPrice({
       minimalPrice,
       maximumPrice,
-      [e.target.name]: includeProperty(e.target.value, !!e.target.value),
+      [e.target.name]: e.target.value,
     });
   };
   return (
@@ -48,6 +46,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({
           onChange={handlePrice}
           placeholder="до"
         />
+        BYN
       </div>
     </>
   );

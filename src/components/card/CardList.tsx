@@ -10,7 +10,7 @@ type Props = {
 const CardList: FC<Props> = ({ cards }) => {
   return (
     <>
-      {Boolean(cards.length) && (
+      {!!cards.length && (
         <div className={styles.list}>
           {cards.map((card) => (
             <Card key={card.id} {...card} />
