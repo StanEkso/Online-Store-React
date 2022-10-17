@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { ProductColor } from "../../types/color";
 import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";
@@ -6,20 +6,20 @@ import styles from "./Filters.module.scss";
 type Props = {
   colors: ProductColor[];
   filters: FiltersOptions;
-  setFilters: React.Dispatch<React.SetStateAction<FiltersOptions>>;
+  setColors: (colors: Set<ProductColor>) => void;
 };
 
-const FilterByColor: FC<Props> = ({ colors, filters, setFilters }) => {
-  const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentColors = new Set(filters.selectedColors);
-    currentColors.has(e.target.name as ProductColor)
-      ? currentColors.delete(e.target.name as ProductColor)
-      : currentColors.add(e.target.name as ProductColor);
-    setFilters({
-      ...filters,
-      selectedColors: currentColors,
-    });
-  };
+const FilterByColor: FC<Props> = ({ colors, filters, setColors }) => {
+  const handleChecked = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const currentColors = new Set(filters.selectedColors);
+      currentColors.has(e.target.name as ProductColor)
+        ? currentColors.delete(e.target.name as ProductColor)
+        : currentColors.add(e.target.name as ProductColor);
+      setColors(currentColors);
+    },
+    [filters, setColors]
+  );
   return (
     <>
       <h4 className={styles.container__title}>По цвету</h4>

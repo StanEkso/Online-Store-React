@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useFilters, useSorting } from "../../hooks";
+import { ProductColor } from "../../types/color";
 import generateProducts from "../../utils/product-generator";
 import CardList from "../card/CardList";
 import Container from "../container/Container";
@@ -27,12 +28,14 @@ function App() {
     () => Array.from(new Set(cards.map(({ color }) => color))),
     [cards]
   );
-  const setSearchValue = (searchValue: string) => {
+  const setSearchValue = useCallback((searchValue: string) => {
     setFilters((filters) => ({
       ...filters,
       searchValue,
     }));
-  };
+  }, []);
+  const setSelectedColors = (selectedColors: Set<ProductColor>) =>
+    setFilters((filters) => ({ ...filters, selectedColors }));
   return (
     <div className="app__wrapper">
       <FilterByName value={filters.searchValue} setValue={setSearchValue} />
@@ -44,7 +47,7 @@ function App() {
             <FilterByColor
               colors={colors}
               filters={filters}
-              setFilters={setFilters}
+              setColors={setSelectedColors}
             />
             <FilterByPrice filters={filters} setFilters={setFilters} />
           </Container>

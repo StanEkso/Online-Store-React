@@ -3,30 +3,20 @@ import { MAXIMUM_PRICE } from "../../constants";
 import { FiltersOptions } from "../../types/filters";
 import styles from "./Filters.module.scss";
 
-type Props = {
+interface FilterPriceProps {
   filters: FiltersOptions;
   setFilters: React.Dispatch<React.SetStateAction<FiltersOptions>>;
-};
+}
 
-const FilterByPrice: FC<Props> = ({ filters, setFilters }) => {
+const includeProperty = <T,>(prop: T, inc: boolean): T | undefined =>
+  inc ? prop : undefined;
+
+const FilterByPrice: FC<FilterPriceProps> = ({ filters, setFilters }) => {
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFilters = { ...filters };
-    if (!e.target.value) {
-      switch (e.target.name) {
-        case "minimalPrice":
-          delete newFilters.minimalPrice;
-          break;
-        case "maximumPrice":
-          delete newFilters.maximumPrice;
-          break;
-      }
-      setFilters(newFilters);
-    } else {
-      setFilters({
-        ...newFilters,
-        [e.target.name]: +e.target.value,
-      });
-    }
+    setFilters({
+      ...filters,
+      [e.target.name]: includeProperty(e.target.value, !!e.target.value),
+    });
   };
   return (
     <>

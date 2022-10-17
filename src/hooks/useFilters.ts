@@ -4,26 +4,28 @@ import { FiltersOptions } from "../types/filters";
 import { Product } from "../types/product";
 import { useDebouncedValue } from "./useDebouncedValue";
 
-const getElement = (A: any) => A;
 const getProductColor = (A: Product) => A.color;
 const getProductPrice = (A: Product) => A.price;
 const getProductName = (A: Product) => A.name;
 
 const filterFunctions = {
   includes:
-    (set: Set<any>, getValue = getElement) =>
+    <T>(set: Set<T>, getValue: (value: any) => T = (value) => value) =>
     (value: any) =>
       set.has(getValue(value)),
   max:
-    (pivot: number, getValue = getElement) =>
+    (pivot: number, getValue: (value: any) => number = (value) => value) =>
     (value: any) =>
       pivot >= getValue(value),
   min:
-    (pivot: number, getValue = getElement) =>
+    (pivot: number, getValue: (value: any) => number = (value) => value) =>
     (value: any) =>
       pivot <= getValue(value),
   search:
-    (searchValue: string, getValue = getElement) =>
+    (
+      searchValue: string,
+      getValue: (value: any) => string = (value) => value
+    ) =>
     (value: any) =>
       getValue(value).includes(searchValue),
   default: () => () => true,
@@ -51,7 +53,6 @@ export function useFilters() {
         ? filterFunctions.search(searchValue, getProductName)
         : filterFunctions.default(),
     ];
-    console.log(filterFunctions);
     return (A: Product) => currentFilters.every((f) => f(A));
   }, [selectedColors, minimalPrice, maximumPrice, searchValue]);
   return {

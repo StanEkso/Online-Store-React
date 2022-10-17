@@ -1,12 +1,12 @@
 import React, { FC, useCallback } from "react";
 import ImageAssets from "../../assets/images";
 import styles from "./SearchBar.module.scss";
-type Props = {
+interface FilterNameProps {
   value: string;
   setValue: (value: string) => void;
-};
+}
 
-const FilterByName: FC<Props> = ({ value, setValue }) => {
+const FilterByName: FC<FilterNameProps> = ({ value, setValue }) => {
   const changeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
     [setValue]
