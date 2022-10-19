@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Product } from "../types/product";
 import { SortingType } from "../types/sortings";
 
@@ -17,11 +17,16 @@ export const sortingTypes: Record<string, SortingType<Product>> = {
   },
 };
 
-const useSorting = (key: string) => {
-  return useCallback(
-    (A: Product, B: Product) => sortingTypes[key]?.fn(A, B) ?? 0,
-    [key]
-  );
+const useSorting = (defaultValue: string) => {
+  const [sorting, setSorting] = useState(defaultValue);
+  return {
+    sorting,
+    setSorting,
+    sortingFunction: useCallback(
+      (A: Product, B: Product) => sortingTypes[sorting]?.fn(A, B) ?? 0,
+      [sorting]
+    ),
+  };
 };
 
 export default useSorting;

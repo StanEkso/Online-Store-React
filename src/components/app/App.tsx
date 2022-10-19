@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import { useFilters, useSorting } from "../../hooks";
 import { ProductColor } from "../../types/color";
+import { getProductColor } from "../../utils";
 import generateProducts from "../../utils/product-generator";
 import CardList from "../card/CardList";
 import Container from "../container/Container";
@@ -14,8 +15,7 @@ const PRODUCT_COUNT = 500;
 function App() {
   const [cards] = useState(generateProducts(PRODUCT_COUNT));
 
-  const [sortingValue, setSortingValue] = useState("default");
-  const sortingFunction = useSorting(sortingValue);
+  const { sortingFunction, sorting, setSorting } = useSorting("default");
 
   const { filterFunction, filters, setFilters } = useFilters();
 
@@ -25,28 +25,23 @@ function App() {
   );
 
   const colors = useMemo(
-    () => Array.from(new Set(cards.map(({ color }) => color))).sort(),
+    () => Array.from(new Set(cards.map(getProductColor))).sort(),
     [cards]
   );
-  const setSearchValue = useCallback((searchValue: string) => {
-    setFilters((filters) => ({
-      ...filters,
-      searchValue,
-    }));
-  }, []);
+  const setSearchValue = useCallback(
+    (searchValue: string) =>
+      setFilters((filters) => ({ ...filters, searchValue })),
+    [setFilters]
+  );
   const setSelectedColors = useCallback(
     (selectedColors: Set<ProductColor>) =>
       setFilters((filters) => ({ ...filters, selectedColors })),
-    []
+    [setFilters]
   );
   const setMinMaxPrice = useCallback(
-    (object: { minimalPrice?: number; maximumPrice?: number }) => {
-      setFilters((filters) => ({
-        ...filters,
-        ...object,
-      }));
-    },
-    []
+    (object: { minimalPrice?: number; maximumPrice?: number }) =>
+      setFilters((filters) => ({ ...filters, ...object })),
+    [setFilters]
   );
   return (
     <div className="app__wrapper">
@@ -55,7 +50,7 @@ function App() {
       </header>
       <div className="app__wrapper-header app__wrapper-header-sticky">
         <FilterByName value={filters.searchValue} setValue={setSearchValue} />
-        <Sortings sorting={sortingValue} setSorting={setSortingValue} />
+        <Sortings sorting={sorting} setSorting={setSorting} />
       </div>
 
       <div className="app__wrapper__grid">

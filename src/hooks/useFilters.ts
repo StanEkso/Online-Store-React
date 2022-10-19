@@ -2,11 +2,8 @@ import { useMemo, useState } from "react";
 import { ProductColor } from "../types/color";
 import { FiltersOptions } from "../types/filters";
 import { Product } from "../types/product";
+import { getProductColor, getProductName, getProductPrice } from "../utils";
 import { useDebouncedValue } from "./useDebouncedValue";
-
-const getProductColor = (A: Product) => A.color;
-const getProductPrice = (A: Product) => A.price;
-const getProductName = (A: Product) => A.name;
 
 const filterFunctions = {
   includes:
