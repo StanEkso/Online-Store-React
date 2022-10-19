@@ -1,0 +1,55 @@
+@import "../common/containers";
+
+.container {
+    @include flex(column, 16px);
+
+    &__logotype {
+        padding: 0 60px;
+
+        @media (max-width: 1279px) {
+            padding: 0 30px;
+        }
+
+        @media (max-width: 767px) {
+            padding: 0 10px;
+        }
+
+        padding-top: 16px !important;
+    }
+
+    &__header {
+        padding: 16px 60px;
+
+        @media (max-width: 1279px) {
+            padding: 16px 30px;
+        }
+
+        @media (max-width: 767px) {
+            padding: 16px 10px;
+        }
+
+        &_sticky {
+            z-index: 10;
+            border-bottom: 1px solid $border-color;
+
+            @media (min-width: 768px) {
+                position: sticky;
+                top: 0;
+            }
+        }
+
+        @include flex(column, 16px);
+
+        background: #fff;
+    }
+
+    &__column {
+        position: relative;
+
+        &_sticky {
+            @include flex(column, 16px);
+            position: sticky;
+            top: 144px;
+        }
+    }
+}

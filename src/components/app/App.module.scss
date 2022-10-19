@@ -1,0 +1,25 @@
+@import "../common/containers";
+
+.container {
+    &__grid {
+        @include grid(1, 16px);
+        margin: 20px 60px;
+
+        @media (max-width: 1279px) {
+            margin: 20px 30px;
+        }
+
+        @media (max-width: 767px) {
+            margin: 10px;
+        }
+
+        @media (min-width: 768px) {
+            grid-template-columns: 1fr 2.5fr;
+        }
+
+        @media (min-width: 1279px) {
+            grid-template-columns: 1fr 3fr;
+        }
+    }
+
+}

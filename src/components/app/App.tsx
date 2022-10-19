@@ -8,8 +8,10 @@ import Container from "../container/Container";
 import FilterByColor from "../filters/FilterByColor";
 import FilterByName from "../filters/FilterByName";
 import FilterByPrice from "../filters/FilterByPrice";
+import Layout from "../layout/Layout";
+import StickyHeader from "../layout/StickyHeader";
 import Sortings from "../sortings/Sortings";
-
+import styles from "./App.module.scss";
 const PRODUCT_COUNT = 500;
 
 function App() {
@@ -44,18 +46,15 @@ function App() {
     [setFilters]
   );
   return (
-    <div className="app__wrapper">
-      <header className="app__wrapper-logotype">
-        <h1>React-Shop</h1>
-      </header>
-      <div className="app__wrapper-header app__wrapper-header-sticky">
+    <Layout>
+      <StickyHeader>
         <FilterByName value={filters.searchValue} setValue={setSearchValue} />
         <Sortings sorting={sorting} setSorting={setSorting} />
-      </div>
+      </StickyHeader>
 
-      <div className="app__wrapper__grid">
-        <div className="app__wrapper-column">
-          <div className="app__wrapper-column-sticky">
+      <div className={styles.container__grid}>
+        <div className={styles.container__column}>
+          <div className={styles.container__column_sticky}>
             <Container>
               <FilterByColor
                 colors={colors}
@@ -73,7 +72,7 @@ function App() {
         </div>
         <CardList cards={filteredCards} />
       </div>
-    </div>
+    </Layout>
   );
 }
 
