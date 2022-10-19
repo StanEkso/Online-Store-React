@@ -43,13 +43,5 @@
         background: #fff;
     }
 
-    &__column {
-        position: relative;
 
-        &_sticky {
-            @include flex(column, 16px);
-            position: sticky;
-            top: 144px;
-        }
-    }
 }
