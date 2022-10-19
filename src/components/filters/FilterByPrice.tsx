@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { MAXIMUM_PRICE } from "../../constants";
 import styles from "./Filters.module.scss";
 
@@ -16,13 +16,14 @@ const FilterByPrice: FC<FilterPriceProps> = ({
   maximumPrice,
   setMinMaxPrice,
 }) => {
-  const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMinMaxPrice({
-      minimalPrice,
-      maximumPrice,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handlePrice = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setMinMaxPrice({
+        [e.target.name]: e.target.value,
+      });
+    },
+    [setMinMaxPrice]
+  );
   return (
     <>
       <h4 className={styles.container__title}>По цене</h4>
@@ -31,6 +32,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({
           className={styles.price__input}
           min={0}
           max={maximumPrice || MAXIMUM_PRICE}
+          value={minimalPrice}
           type="number"
           name="minimalPrice"
           onChange={handlePrice}
@@ -41,6 +43,7 @@ const FilterByPrice: FC<FilterPriceProps> = ({
           className={styles.price__input}
           min={minimalPrice || 0}
           max={MAXIMUM_PRICE}
+          value={maximumPrice}
           type="number"
           name="maximumPrice"
           onChange={handlePrice}
