@@ -1,10 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import styles from "./Container.module.scss";
 
-interface ContainerProps {
-  children: React.ReactElement[] | React.ReactElement;
-}
-const Container: FC<ContainerProps> = ({ children }) => {
+const Container: FC<PropsWithChildren> = ({ children }) => {
   return <div className={styles.container}>{children}</div>;
 };
 
