@@ -2,14 +2,15 @@
 
 This project is basic example of shop.
 
-## Preview
+## Preview on Desktop
 
-![Desktop Preview](./preview/desktop.png)
+![Desktop Preview](./preview/desktop.png "Desktop 1440x900px")
 
 ## Technologies
 
 - React
 - Typescript
+- SCSS for styling
 
 ## Project Features
 
@@ -19,3 +20,15 @@ This project is basic example of shop.
   - Filter by name
   - Filter by selected colors
   - Filter by price interval
+
+## Local install
+
+### Pre-requirements:
+
+- Node and NPM installed on your device
+
+### Installation
+
+- Clone this repository
+- Run `npm install` in cloned folder
+- Run `npm start` or `npm start` to start project locally
