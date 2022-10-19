@@ -24,7 +24,7 @@ const filterFunctions = {
       getValue: (value: any) => string = (value) => value
     ) =>
     (value: any) =>
-      getValue(value).includes(searchValue),
+      getValue(value).toLowerCase().includes(searchValue.toLowerCase()),
   default: () => () => true,
 };
 

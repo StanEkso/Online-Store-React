@@ -17,7 +17,7 @@ export const sortingTypes: Record<string, SortingType<Product>> = {
   },
 };
 
-const useSorting = (defaultValue: string) => {
+export const useSorting = (defaultValue: string) => {
   const [sorting, setSorting] = useState(defaultValue);
   return {
     sorting,
@@ -28,5 +28,3 @@ const useSorting = (defaultValue: string) => {
     ),
   };
 };
-
-export default useSorting;
