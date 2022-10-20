@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { sortingTypes } from "../../hooks/useSortings";
 import styles from "./Sortings.module.scss";
 interface Props {
@@ -15,8 +15,11 @@ const getClassesForSelector = (isActive = false) => {
 };
 
 const Sortings: FC<Props> = ({ sorting, setSorting }) => {
-  const handleSortingClick = (type: string) =>
-    setSorting(sorting !== type ? type : "default");
+  const handleSortingClick = useCallback(
+    (type: string) =>
+      setSorting((prevSorting) => (prevSorting !== type ? type : "default")),
+    [setSorting]
+  );
   return (
     <div className={styles.container}>
       {Object.entries(sortingTypes).map(([key, value]) => {

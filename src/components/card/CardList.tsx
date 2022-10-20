@@ -3,11 +3,11 @@ import { Product } from "../../types/product";
 import Card from "./Card";
 import styles from "./Card.module.scss";
 import CardNotFound from "./CardNotFound";
-type Props = {
+interface CardListProps {
   cards: Product[];
-};
+}
 
-const CardList: FC<Props> = ({ cards }) => {
+const CardList: FC<CardListProps> = ({ cards }) => {
   return (
     <>
       {!!cards.length && (
