@@ -5,9 +5,9 @@ import { getProductColor } from "../../utils";
 import generateProducts from "../../utils/product-generator";
 import CardList from "../card/CardList";
 import Container from "../container/Container";
-import FilterByColor from "../filters/FilterByColor";
-import FilterByName from "../filters/FilterByName";
-import FilterByPrice from "../filters/FilterByPrice";
+import SearchBar from "../filters/SearchBar";
+import MultiplySelect from "../filters/MultiplySelect";
+import RangeSelect from "../filters/RangeSelect";
 import Layout from "../layout/Layout";
 import StickyHeader from "../layout/StickyHeader";
 import Sortings from "../sortings/Sortings";
@@ -36,19 +36,23 @@ function App() {
     [setFilters]
   );
   const setSelectedColors = useCallback(
-    (selectedColors: Set<ProductColor>) =>
-      setFilters((filters) => ({ ...filters, selectedColors })),
+    (selectedColors: Set<string>) => {
+      const selected = selectedColors as Set<ProductColor>;
+      setFilters((filters) => ({ ...filters, selectedColors: selected }));
+    },
     [setFilters]
   );
-  const setMinMaxPrice = useCallback(
-    (object: { minimalPrice?: number; maximumPrice?: number }) =>
-      setFilters((filters) => ({ ...filters, ...object })),
-    [setFilters]
-  );
+  const setPriceField = ({ min, max }: { min?: number; max?: number }) => {
+    setFilters((filters) => ({
+      ...filters,
+      minimalPrice: min,
+      maximumPrice: max,
+    }));
+  };
   return (
     <Layout>
       <StickyHeader>
-        <FilterByName value={filters.searchValue} setValue={setSearchValue} />
+        <SearchBar value={filters.searchValue} setValue={setSearchValue} />
         <Sortings sorting={sorting} setSorting={setSorting} />
       </StickyHeader>
 
@@ -56,16 +60,10 @@ function App() {
         <div className={styles.container__column}>
           <div className={styles.container__column_sticky}>
             <Container>
-              <FilterByColor
-                colors={colors}
-                activeColors={filters.selectedColors}
-                setColors={setSelectedColors}
-              />
-              <FilterByPrice
-                maximumPrice={filters.maximumPrice}
-                minimalPrice={filters.minimalPrice}
-                setMinMaxPrice={setMinMaxPrice}
-              />
+              <h4>Цвет</h4>
+              <MultiplySelect options={colors} onChange={setSelectedColors} />
+              <h4>Цена</h4>
+              <RangeSelect onChange={setPriceField} />
             </Container>
             <h2>Всего товаров: {filteredCards.length}</h2>
           </div>

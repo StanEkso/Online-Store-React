@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { Product } from "../types/product";
 import { SortingType } from "../types/sortings";
+import { useDebouncedValue } from "./useDebouncedValue";
 
 export const sortingTypes: Record<string, SortingType<Product>> = {
   "price/asc": {
@@ -19,12 +20,13 @@ export const sortingTypes: Record<string, SortingType<Product>> = {
 
 export const useSorting = (defaultValue: string) => {
   const [sorting, setSorting] = useState(defaultValue);
+  const debouncedSorting = useDebouncedValue(sorting);
   return {
     sorting,
     setSorting,
     sortingFunction: useCallback(
-      (A: Product, B: Product) => sortingTypes[sorting]?.fn(A, B) ?? 0,
-      [sorting]
+      (A: Product, B: Product) => sortingTypes[debouncedSorting]?.fn(A, B) ?? 0,
+      [debouncedSorting]
     ),
   };
 };

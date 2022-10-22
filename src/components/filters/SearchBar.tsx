@@ -1,12 +1,12 @@
 import React, { FC, useCallback } from "react";
 import ImageAssets from "../../assets/images";
 import styles from "./Filters.module.scss";
-interface FilterNameProps {
+interface SearchBarProps {
   value: string;
   setValue: (value: string) => void;
 }
 
-const FilterByName: FC<FilterNameProps> = ({ value, setValue }) => {
+const SearchBar: FC<SearchBarProps> = ({ value, setValue }) => {
   const changeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
     [setValue]
@@ -28,4 +28,4 @@ const FilterByName: FC<FilterNameProps> = ({ value, setValue }) => {
   );
 };
 
-export default React.memo(FilterByName);
+export default React.memo(SearchBar);
