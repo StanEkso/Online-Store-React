@@ -9,6 +9,7 @@ This project is basic example of shop.
 ## Technologies
 
 - React
+- React Hooks (and custom hooks)
 - Typescript
 - SCSS for styling
 
@@ -20,6 +21,7 @@ This project is basic example of shop.
   - Filter by name
   - Filter by selected colors
   - Filter by price interval
+- Components are ready to be reused
 
 ## Local install
 
